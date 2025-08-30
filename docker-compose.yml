@@ -11,6 +11,8 @@ services:
     networks:
       - boards-private-network
       - boards-public-network # TODO change to private network only
+    depends_on:
+      - localstack
 
   localstack:
     container_name: boards-aws
