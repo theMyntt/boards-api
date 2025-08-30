@@ -1,0 +1,35 @@
+services:
+  # TODO create nginx:alpine container
+
+  app:
+    container_name: boards-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - boards-private-network
+      - boards-public-network # TODO change to private network only
+
+  localstack:
+    container_name: boards-aws
+    image: localstack/localstack:4.7.0
+    networks:
+      - boards-private-network
+    ports:
+      - "4566:4566"   # Localstack
+      - "127.0.0.1:4510-4559:4510-4559"
+    environment:
+      - SERVICES=dynamodb,s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - "./localstack-data:/tmp/localstack"
+
+networks:
+  boards-private-network:
+    internal: false # Temp
+  boards-public-network:
+    internal: false
