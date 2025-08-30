@@ -115,3 +115,5 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/go,jetbrains+all
 .env*
 !.env.example
+
+localstack-data/
