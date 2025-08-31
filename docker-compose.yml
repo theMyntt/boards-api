@@ -28,7 +28,7 @@ services:
       - DATA_DIR=/tmp/localstack/data
       - AWS_DEFAULT_REGION=us-east-1
     volumes:
-      - "./localstack-data:/tmp/localstack"
+      - "./localstack-data:/var/lib/localstack"
 
 networks:
   boards-private-network:
