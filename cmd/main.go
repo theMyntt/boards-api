@@ -4,11 +4,13 @@ import (
 	_ "boards-api/docs"
 	"boards-api/internal/adapters/http"
 	"context"
+	"log"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -28,6 +30,10 @@ import (
 // @host						localhost:8080
 // @schemes					http
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("[WARN] No .env file found, using system environment variables")
+	}
+
 	awsEndpoint := os.Getenv("AWS_ENDPOINT")
 	awsRegion := os.Getenv("AWS_REGION")
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
