@@ -35,12 +35,13 @@ definitions:
     - Admin
 info:
   contact:
-    email: support@swagger.io
-    name: API Support
+    email: gabriel.araujo2902@outlook.com.br
+    name: Gabriel Araújo Lima
     url: http://www.swagger.io/support
-  description: Testing Swagger APIs.
+  description: The Boards Backend Service. He contains a Task Management and User
+    Management
   termsOfService: http://swagger.io/terms/
-  title: TODO APIs
+  title: Boards API
   version: "1.0"
 paths:
   /api/user/v1/register:

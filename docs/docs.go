@@ -11,9 +11,9 @@ const docTemplate = `{
         "title": "{{.Title}}",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
-            "name": "API Support",
+            "name": "Gabriel Araújo Lima",
             "url": "http://www.swagger.io/support",
-            "email": "support@swagger.io"
+            "email": "gabriel.araujo2902@outlook.com.br"
         },
         "version": "{{.Version}}"
     },
@@ -117,8 +117,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "TODO APIs",
-	Description:      "Testing Swagger APIs.",
+	Title:            "Boards API",
+	Description:      "The Boards Backend Service. He contains a Task Management and User Management",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
