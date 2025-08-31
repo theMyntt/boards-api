@@ -13,6 +13,9 @@ services:
       - boards-public-network # TODO change to private network only
     depends_on:
       - localstack
+    environment:
+      - AWS_ENDPOINT=${AWS_ENDPOINT}
+      - AWS_REGION=${AWS_REGION}
 
   localstack:
     container_name: boards-aws
@@ -26,7 +29,7 @@ services:
       - SERVICES=dynamodb,s3
       - DEBUG=1
       - DATA_DIR=/tmp/localstack/data
-      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_DEFAULT_REGION=${AWS_REGION}
     volumes:
       - "./localstack-data:/var/lib/localstack"
 
