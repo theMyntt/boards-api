@@ -2,24 +2,35 @@ package main
 
 import (
 	"boards-api/internal/adapters/http"
+	"context"
+	"os"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	router := gin.Default()
+	awsEndpoint := os.Getenv("AWS_ENDPOINT")
+	awsRegion := os.Getenv("AWS_REGION")
+	cfg, err := config.LoadDefaultConfig(context.TODO(),
+		config.WithRegion(awsRegion),
+		config.WithClientLogMode(aws.LogRequest|aws.LogRetries))
 
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	if err != nil {
+		panic(err)
+	}
+
+	cfg.BaseEndpoint = &awsEndpoint
+	cfg.Region = awsRegion
+
+	router := gin.Default()
 
 	api := router.Group("/api")
 
 	createUserRoutes(api)
 
-	err := router.Run()
+	err = router.Run()
 	if err != nil {
 		panic(err)
 
