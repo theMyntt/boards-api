@@ -1,0 +1,70 @@
+definitions:
+  createuser.CreateUserInput:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        minLength: 12
+        type: string
+      role:
+        $ref: '#/definitions/enums.RoleEnum'
+    required:
+    - email
+    - name
+    - password
+    - role
+    type: object
+  createuser.CreateUserOutput:
+    properties:
+      message:
+        type: string
+      path:
+        type: string
+      status_code:
+        type: integer
+    type: object
+  enums.RoleEnum:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - User
+    - Admin
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Testing Swagger APIs.
+  termsOfService: http://swagger.io/terms/
+  title: TODO APIs
+  version: "1.0"
+paths:
+  /api/user/v1/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/createuser.CreateUserInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/createuser.CreateUserOutput'
+      summary: Register a new User
+securityDefinitions:
+  JWT:
+    in: header
+    name: token
+    type: apiKey
+swagger: "2.0"

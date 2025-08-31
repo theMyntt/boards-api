@@ -9,6 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateUserHandler godoc
+//
+//	@Summary	Register a new User
+//	@Router		/api/user/v1/register [post]
+//	@Accept		json
+//	@Produce	json
+//	@Param		user	body		createuser.CreateUserInput	true	"User Data"
+//	@Success	201		{object}	createuser.CreateUserOutput
 func CreateUserHandler(c *gin.Context) {
 	var dto createuser.CreateUserInput
 	if err := c.ShouldBindJSON(&dto); err != nil {
